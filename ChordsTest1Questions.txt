@@ -1,4 +1,0 @@
-"What is the root of the chord?"
-"Inversion? (root, 1st, 2nd, etc.)"
-“Which note would you change to make the chord minor?”
-"What is the root of the chord that this should resolve to?"
