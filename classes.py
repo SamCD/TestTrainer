@@ -25,6 +25,8 @@ class Student(object):
         You will have two attempts, after which time a study report will be written for you and you will have the
         opportunity to send any feedback or comments to your instructor.
         
+        Quizzes will count towards your score. You can always practice by taking a true_or_false() test!
+        
         Args: subject (string): the test subject. Options are scale,chord or interval
               level (int): 1 or 2. The test difficulty, in ascending order. ** At this time, level 2 tests are not available
               for interval quizzes. **
@@ -35,6 +37,8 @@ class Student(object):
             pass
         except:
             "'" + subect + "'"
+        import timeit
+        strt = timeit.time()
         mo = (subject,level)
         answers = []
         anskey = []
@@ -77,6 +81,8 @@ class Student(object):
                                 print tfiles[counter - 1][i]
                                 qs.close()
             question -= 1
+        fin = timeit.time()
+        self.points += score * (1 + (1 / (fin - strt)))
         self.report(self.name, hints)
 
 
