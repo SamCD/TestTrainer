@@ -4,6 +4,13 @@
 import notelib
 
 class Student(object):
+    """Begin by entering your name
+    Ex: me = Student("Sam")"""
+    print "Welcome, {}".format(self.name)
+    
+    intro = open("intro",'r')
+    print intro.read()
+    intro.close()
 
     PassedTests = []
     score = 0
@@ -63,6 +70,7 @@ class Student(object):
                         else:
                             try:
                                 ht = open(tfiles[counter],'r')
+                            finally:
                                 hints = hs.read().split("\n")
                                 study.append(hints[i])
                                 print hints[i]
