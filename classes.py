@@ -13,19 +13,46 @@ class Student(object):
 
     def take_test(self,subject,level):
         mo = (subject,level)
+        answers = []
+        anskey = []
+        score = 0
+        study = []
         tfiles = ["{}questions{}.txt".format(mo[0],mo[1]),
                   "{}answers{}.txt".format(mo[0],mo[1]),
                   "{}hints{}.txt".format(mo[0],mo[1]),
                   "{}followups{}.txt".format(mo[0],mo[1])]
         question = 1
         while question:
-            counter = 0
-            try:
-                qs = open(tfiles[counter],'r').split()
-            except IOError:
-                print "Test subject and/or level not available"
-            ans = raw_input(qs[0])
-            answers.append(ans)
+            counter = 4
+            while counter:
+                try:
+                    qs = open(tfiles[counter],'r').split("\n")
+                except IOError:
+                    print "Test subject and/or level not available"
+                test = len(qs)
+                if counter == 4:
+                    while test:
+                        ans = raw_input(qs[0])
+                        answers.append(ans[i])
+                        test -= 1
+                    counter -= 1
+                    qs.close()
+                else:
+                    for i in qs:
+                        anskey.append(qs[i])
+                    counter -= 1
+                    for i in answers:
+                        if i == anskey[i]:
+                            score += 1
+                        else:
+                            try:
+                                ht = open(tfiles[counter],'r')
+                                hints = hs.read().split("\n")
+                                study.append(hints[i])
+                                print hints[i]
+                                print tfiles[counter - 1][i]
+                                qs.close()
+            question -= 1
         
 
 
