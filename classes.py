@@ -11,7 +11,19 @@ class Student(object):
     def __init__(self,name):
         self.name=name
 
+
     def take_test(self,subject,level):
+        """This command initiates a quiz. You will be asked a few questions. Any that are answered incorrectly
+        will prompt a hint and a follow-up question. The follow-up is meant to be considered, but not officially answered.
+        You will have two attempts, after which time a study report will be written for you and you will have the
+        opportunity to send any feedback or comments to your instructor.
+        
+        Args: subject (string): the test subject. Options are scale,chord or interval
+              level (int): 1 or 2. The test difficulty, in ascending order. ** At this time, level 2 tests are not available
+              for interval quizzes. **
+        Ex: student_name.take_test("scale", 1)
+            > What is this scale (..............)?
+        """
         mo = (subject,level)
         answers = []
         anskey = []
@@ -53,7 +65,7 @@ class Student(object):
                                 print tfiles[counter - 1][i]
                                 qs.close()
             question -= 1
-        
+        self.report(self.name, hints)
 
 
     def report(self,name, list_obj):
