@@ -24,6 +24,10 @@ class Student(object):
         Ex: student_name.take_test("scale", 1)
             > What is this scale (..............)?
         """
+        try:
+            pass
+        except:
+            "'" + subect + "'"
         mo = (subject,level)
         answers = []
         anskey = []
