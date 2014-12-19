@@ -19,5 +19,8 @@ class Student(object):
                   "{}followups.txt{}".format(mo[0],mo[1])]
         counter = 0
         question = 0
-        qs = open(tfiles[counter],'r').split()
+        try:
+            qs = open(tfiles[counter],'r').split()
+        except IOError:
+            print "Test subject and/or level not available"
         ans = raw_input(qs[0])
