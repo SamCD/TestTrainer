@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""This module contains the keys for test questions and their related hints
+and followups"""
+
 
 hints = {'scale': {1:
                    {1:[2,2], 2:[1,1], 3:[1,1]},

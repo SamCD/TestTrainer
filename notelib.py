@@ -1,8 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""Note library"""
 
-all_notes = ['A','A#','Bb','B','C','C#','Db','E','Fb','E','E#','F','F#','Gb','G','G#','Ab']
-enharmonics = {'C#':'Db','D#':'Eb', 'E':'Fb','F':'E#','F#':'Gb','G#':'Ab','A#':'Bb','B':'Cb','C':'B#'}
+all_notes = ['A','A#','Bb','B','C','C#','Db','E','Fb',
+             'E','E#','F','F#','Gb','G','G#','Ab']
+
+enharmonics = {'C#':'Db','D#':'Eb','A#':'Bb','Bb':'A#',
+               'Fb':'E','F#':'Gb','G#':'Ab','E#':'F',
+               'Db':'C#','Gb':'F#','Ab':'G#'}
 Major = {
 'C':['C','D','E','F','G','A','B'],
 'F':['F','G','A','Bb','C','D','E'],
