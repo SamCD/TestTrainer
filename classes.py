@@ -2,21 +2,28 @@
 # -*- coding: utf-8 -*-
 
 import notelib
+import testfiles
+import time
+import os
+
 
 class Student(object):
     """Begin by entering your name
     Ex: me = Student("Sam")"""
-    print "Welcome, {}".format(self.name)
     
-    intro = open("intro",'r')
-    print intro.read()
-    intro.close()
-
     PassedTests = []
     score = 0
 
-    def __init__(self,name):
-        self.name=name
+    def __init__(self):
+        
+        intro = open("intro",'r')
+        print intro.read()
+        intro.close()
+        try:
+            self.name=raw_input("What is your name? ")
+        except NameError:
+            self.name = "'" + name + "'"
+        print "Hi, {}.".format(self.name)
 
 
     def take_test(self,subject,level):
@@ -33,13 +40,9 @@ class Student(object):
         Ex: student_name.take_test("scale", 1)
             > What is this scale (..............)?
         """
-        try:
-            pass
-        except:
-            "'" + subect + "'"
-        import timeit
-        strt = timeit.time()
+
         mo = (subject,level)
+        strt = time.time()
         answers = []
         anskey = []
         score = 0
@@ -50,59 +53,41 @@ class Student(object):
                   "{}followups{}.txt".format(mo[0],mo[1])]
         question = 1
         while question:
-            counter = 4
-            while counter:
+            counter = 0
+            while counter < 4:
                 try:
-                    qs = open(tfiles[counter],'r').split("\n")
+                    qs = open(tfiles[counter],'r')
                 except IOError:
                     print "Test subject and/or level not available"
+                ques = qs.read().split("\n")
+                print ques
                 test = len(qs)
                 if counter == 4:
                     while test:
                         ans = raw_input(qs[0])
                         answers.append(ans[i])
                         test -= 1
-                    counter -= 1
+                    counter += 1
                     qs.close()
                 else:
                     for i in qs:
                         anskey.append(qs[i])
-                    counter -= 1
+                    counter += 1
                     for i in answers:
                         if i == anskey[i]:
                             score += 1
                         else:
                             try:
-                                ht = open(tfiles[counter],'r')
+                                ht = open(testfiles.tfiles[counter],'r')
                             finally:
                                 hints = hs.read().split("\n")
                                 study.append(hints[i])
                                 print hints[i]
-                                print tfiles[counter - 1][i]
+                                print tfiles[counter + 1][i]
                                 qs.close()
             question -= 1
-        fin = timeit.time()
+        fin = time.time()
         self.points += score * (1 + (1 / (fin - strt)))
         self.report(self.name, hints)
 
 
-    def report(self,name, list_obj):
-    """Generates a report for the given subject.
-    Args: name (char): the type of report. Options are Comments, Study.
-     list (char): the name of the list to be written to the report.
-    Ex: > report(Study, study)
-    > 
-    # writes the list 'study' to the Study.txt file """
-    import os
-    import time
-    fname = os.path.abspath("{}.txt".format(name))
-    try:
-        fh = open(fname, 'a')
-    except IOError:
-        fh = open(fname, 'w')
-    finally:
-        fh.write(time.time())
-        for i in list:
-            fh.write(list_obj[i])
-        fh.close()
-        fh.flush()
