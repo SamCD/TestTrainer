@@ -12,6 +12,9 @@ Instantiate Student class:
 
 if you would like to take a graded test:
     me.take_test(subj,lvl)
+
+if you would like to take a practice test:
+    true_or_false(subj)
 where subj is a string either 'scale' or 'chord' and lvl is an integer 1 or 2
     
 
