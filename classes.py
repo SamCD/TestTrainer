@@ -10,9 +10,7 @@ import os
 class Student(object):
     """Begin by entering your name
     Ex: me = Student("Sam")"""
-    
-    PassedTests = []
-    score = 0
+
 
     def __init__(self):
         
@@ -24,6 +22,8 @@ class Student(object):
         except NameError:
             self.name = "'" + name + "'"
         print "Hi, {}.".format(self.name)
+
+        self.points = 0
 
 
     def take_test(self,subject,level):
@@ -47,11 +47,11 @@ class Student(object):
         anskey = []
         score = 0
         study = []
-        tfiles = ["{}questions{}.txt".format(mo[0],mo[1]),
-                  "{}answers{}.txt".format(mo[0],mo[1]),
-                  "{}hints{}.txt".format(mo[0],mo[1]),
-                  "{}followups{}.txt".format(mo[0],mo[1])]
-        question = 1
+        tfiles = ["{}questions{}".format(mo[0],mo[1]),
+                  "{}answers{}".format(mo[0],mo[1]),
+                  "{}hints{}".format(mo[0],mo[1]),
+                  "{}followups{}".format(mo[0],mo[1])]
+        question = 2
         while question:
             counter = 0
             while counter < 4:
@@ -60,32 +60,35 @@ class Student(object):
                 except IOError:
                     print "Test subject and/or level not available"
                 ques = qs.read().split("\n")
-                print ques
-                test = len(qs)
-                if counter == 4:
-                    while test:
-                        ans = raw_input(qs[0])
-                        answers.append(ans[i])
+                test = len(ques)
+                if counter == 0:
+                    quest = 0
+                    while test > 0:
+                        ans = raw_input(ques[quest])
+                        answers.append(ans)
+                        quest += 1
                         test -= 1
                     counter += 1
                     qs.close()
                 else:
-                    for i in qs:
-                        anskey.append(qs[i])
+                    for i,j in enumerate(ques):
+                        anskey.append(ques[i])
                     counter += 1
-                    for i in answers:
-                        if i == anskey[i]:
+                    for i,j in enumerate(answers):
+                        if j == anskey[i]:
                             score += 1
                         else:
-                            try:
-                                ht = open(testfiles.tfiles[counter],'r')
-                            finally:
-                                hints = hs.read().split("\n")
-                                study.append(hints[i])
-                                print hints[i]
-                                print tfiles[counter + 1][i]
-                                qs.close()
-            question -= 1
+                            ht = open(tfiles[counter],'r')
+                            hints = ht.read().split("\n")
+                            study.append(hints[i])
+                            print hints[i]
+                            print tfiles[counter + 1][i]
+                            qs.close()
+            if (score / len(ques)) > 0.6:
+                print "Nice job!"
+                break
+            else:
+                question -= 1
         fin = time.time()
         self.points += score * (1 + (1 / (fin - strt)))
         self.report(self.name, hints)
